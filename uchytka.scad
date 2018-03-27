@@ -11,6 +11,8 @@ module uchytka(odstup) {
     sklon_trubky = atan(2/100);
     
     prumer_matky = 15;
+    vyska_matky = 7;
+    podlozka_matky = 4;
 
     translate([-(polomer_trubky + 3 + odstup / 2), -sirka/2])
     difference() {
@@ -18,7 +20,7 @@ module uchytka(odstup) {
         // tady bude trubka
         translate([0, sirka/2, 0]) 
             rotate([0, sklon_trubky, 0])
-            cylinder(h=vyska *2 , r=polomer_trubky, $fn=50);
+            cylinder(h=vyska *2 , r=polomer_trubky, $fn=35);
         // uchytka na pasku
         rotate([90, 0, 0]) 
             translate([polomer_trubky + 3 + polomer_uchytky, vyska / 2, -35]) 
@@ -29,12 +31,12 @@ module uchytka(odstup) {
         // sroub
         rotate([0, 90,0]) 
             translate([-vyska/2, sirka/2, 30]) 
-            cylinder(h=100, r=4);
+            cylinder(h=100, r=3.5);
         // vykus pro matku
-        translate([polomer_trubky + 3 + odstup - vykus_vzadu -6 - 4, 
+        translate([polomer_trubky + 3 + odstup - vykus_vzadu - vyska_matky - podlozka_matky, 
                   sirka/2 - prumer_matky/2, 
                   vyska/2 - prumer_matky/2])
-            cube([6, prumer_matky, prumer_matky + (vyska - prumer_matky) / 2 + 1]);
+            cube([vyska_matky, prumer_matky, prumer_matky + (vyska - prumer_matky) / 2 + 1]);
     }
 
 }
